@@ -60,17 +60,13 @@
 
     <!-- A readme.txt to display when the package is installed -->
     <files>
-        <file src="..\IOST\bin\Release\netstandard2.0\IOST.dll" target="lib\netstandard2.0\IOST.dll" />
+        <file src="..\ChainPay\bin\Release\netstandard2.0\ChainPay.dll" target="lib\netstandard2.0\ChainPay.dll" />
+                
+        <file src="..\ChainPay.Net45\bin\x64\Release\ChainPay.dll" target="build\x64" />
+        <file src="..\ChainPay.Net45\bin\x64\Release\ChainPay.dll" target="lib\net45\ChainPay.dll" />
         
-        <file src="IOST.Net45.targets" target="build" />
-		<file src="IOST.Net45.targets" target="lib\net45\IOST.Net45.targets" />
-        
-        <file src="..\IOST.Net45\bin\x64\Release\IOST.dll" target="build\x64" />
-        <file src="..\IOST.Net45\bin\x64\Release\IOST.dll" target="lib\net45\IOST.dll" />
-        
-        <file src="..\IOST.Net45\bin\x86\Release\IOST.dll" target="build\x86" />
-        <file src="..\IOST.Net45\bin\x86\Release\IOST.dll" target="lib\net45\IOST.dll" />
-        
-        <file src="readme.txt" target="" />
+        <file src="..\ChainPay.Net45\bin\x86\Release\ChainPay.dll" target="build\x86" />
+        <file src="..\ChainPay.Net45\bin\x86\Release\ChainPay.dll" target="lib\net45\ChainPay.dll" />
+
     </files>
 </package>
