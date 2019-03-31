@@ -63,13 +63,14 @@ namespace ChainPay
             byte[] gzbytes = null;
 
             using (var mem = new MemoryStream())
-            using (var gzwriter = new GZipStream(mem, CompressionLevel.Optimal))
-            using (var writer = new StreamWriter(gzwriter, UnicodeEncoding.UTF8))
             {
-                var json = JsonConvert.SerializeObject(req);
-                writer.Write(json);
-                writer.Flush();
-
+                using (var gzwriter = new GZipStream(mem, CompressionLevel.Fastest))
+                using (var writer = new StreamWriter(gzwriter, UnicodeEncoding.UTF8))
+                {
+                    var json = JsonConvert.SerializeObject(req);
+                    writer.Write(json);
+                    writer.Flush();
+                }
                 gzbytes = mem.ToArray();
             }
 
