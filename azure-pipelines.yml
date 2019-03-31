@@ -1,0 +1,60 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- task: NuGetToolInstaller@0
+  inputs:
+    versionSpec: '4.9.4' 
+    checkLatest: false
+
+- task: NuGetCommand@2
+  inputs:
+    command: restore
+    restoreSolution: csharp/ChainPay.sln
+
+- task: VSBuild@1
+  inputs:
+    solution: 'csharp/ChainPay.sln'
+    msbuildArgs: /target:ChainPay:Rebuild /property:Configuration=Release /property:Platform="Any CPU"
+    restoreNugetPackages: true
+    platform: "Any CPU"
+    configuration: Release
+    clean: false
+
+- task: VSBuild@1
+  inputs:
+    solution: 'csharp/ChainPay.sln'
+    msbuildArgs: /target:ChainPay_Net45:Rebuild /property:Configuration=Release /property:Platform=x64
+    restoreNugetPackages: true
+    platform: "x64"
+    configuration: Release
+    clean: false
+
+- task: VSBuild@1
+  inputs:
+    solution: 'csharp/ChainPay.sln'
+    msbuildArgs: /target:ChainPay_Net45:Rebuild /property:Configuration=Release /property:Platform=x86
+    restoreNugetPackages: true
+    platform: "x86"
+    configuration: Release
+    clean: false
+
+- task: NuGetCommand@2
+  inputs:
+    command: pack
+    packagesToPack: "csharp/nuget/ChainPay.nuspec"
+
+- task: NuGetCommand@2
+  inputs:
+    command: push
+    packagesToPush: "$(Build.ArtifactStagingDirectory)/ChainPay*.nupkg"
+    nuGetFeedType: External
+    publishFeedCredentials: "nugetconnection"
