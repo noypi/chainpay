@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChainPay\ChainPay\ChainPay.csproj" />
+    <ProjectReference Include="..\ChainPay\ChainPay.csproj" />
   </ItemGroup>
 
   <ItemGroup>
