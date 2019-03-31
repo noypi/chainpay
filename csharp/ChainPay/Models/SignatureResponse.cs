@@ -21,8 +21,7 @@ namespace ChainPay.Models
         ///    - the signature must be filled
         /// </summary>
         public static readonly string RESULT_APPROVE = "Approve";
-
-
+        
         [JsonProperty("ChainName")]
         public string BlockchainName { get; set; }
 
@@ -35,6 +34,9 @@ namespace ChainPay.Models
         [JsonProperty("Tag")]
         public string Tag { get; set; }
         
+        /// <summary>
+        /// Base64 encode signature
+        /// </summary>
         [JsonProperty("Signature")]
         public string Signature { get; set; }
 

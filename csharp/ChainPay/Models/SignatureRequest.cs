@@ -38,7 +38,7 @@ namespace ChainPay.Models
         public string TransferMethod { get; set; }
 
         /// <summary>
-        /// The expected has of the message
+        /// Base64 of the expected message hash
         /// </summary>
         [JsonProperty("MessageHash")]
         public string MessageHash { get; set; }
