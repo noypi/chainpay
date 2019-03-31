@@ -5,8 +5,10 @@
 Blockchain Signature Request
 
 ### Example flow
-1. Seller generates a Signature Request.
+
 ![alt text](https://github.com/noypi/chainpay/blob/master/scanning.png "Scanning Signature Request")
+
+1. Seller generates a Signature Request.
 2. Buyer reads or copies the request.
 3. Buyer signs and generates a response.
 4. Seller reads or copies the response.
