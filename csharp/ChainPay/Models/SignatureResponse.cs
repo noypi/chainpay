@@ -4,18 +4,37 @@ namespace ChainPay.Models
 
     public class SignatureResponse
     {
+        /// <summary>
+        /// The current transaction is cancelled
+        /// </summary>
+        public static readonly string RESULT_DISAPPROVE = "Disapprove";
+
+        /// <summary>
+        /// Client have executed the transaction
+        ///   - the signature is empty
+        ///   - the transaction hash must be filled
+        /// </summary>
+        public static readonly string RESULT_DIDTRANSFER = "DidTransfer";
+
+        /// <summary>
+        /// Client have approve the request
+        ///    - the signature must be filled
+        /// </summary>
+        public static readonly string RESULT_APPROVE = "Approve";
+
+
         [JsonProperty("ChainName")]
         public string BlockchainName { get; set; }
 
         [JsonProperty("ChainCode")]
         public string BlockchainCode { get; set; }
 
+        /// <summary>
+        /// Must send the same Tag from the request
+        /// </summary>
         [JsonProperty("Tag")]
         public string Tag { get; set; }
         
-        [JsonProperty("MessageHash")]
-        public string MessageHash { get; set; }
-
         [JsonProperty("Signature")]
         public string Signature { get; set; }
 
@@ -23,6 +42,7 @@ namespace ChainPay.Models
         /// Can be any of
         ///   - Disapprove
         ///   - DidTransfer
+        ///   - Approve
         /// </summary>
         [JsonProperty("Result")]
         public string Result { get; set; }

@@ -4,12 +4,28 @@ namespace ChainPay.Models
 
     public class SignatureRequest<T>
     {
+        /// <summary>
+        /// Client is expected to response
+        /// </summary>
+        public static readonly string TRANSFERMETHOD_MUSTREPLY = "MustReply";
+
+        /// <summary>
+        /// Client can send the transfer directly, and may not response
+        /// </summary>
+        public static readonly string TRANSFERMETHOD_CLIENTCANTRANSFER = "ClientCanTransfer";
+
         [JsonProperty("ChainName")]
         public string BlockchainName { get; set; }
 
         [JsonProperty("ChainCode")]
         public string BlockchainCode { get; set; }
 
+        [JsonProperty("ExpiryUTCMillis")]
+        public string ExpiryUTCMillis { get; set; }
+
+        /// <summary>
+        /// Any string, this should be sent back by the client
+        /// </summary>
         [JsonProperty("Tag")]
         public string Tag { get; set; }
 
@@ -21,9 +37,16 @@ namespace ChainPay.Models
         [JsonProperty("TransferMethod")]
         public string TransferMethod { get; set; }
 
+        /// <summary>
+        /// The expected has of the message
+        /// </summary>
         [JsonProperty("MessageHash")]
         public string MessageHash { get; set; }
 
+        /// <summary>
+        /// The hash algo used in MessageHash
+        /// Example: SHA3-256
+        /// </summary>
         [JsonProperty("HashAlgo")]
         public string HashAlgo { get; set; }
 
