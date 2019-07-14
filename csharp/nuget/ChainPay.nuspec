@@ -6,7 +6,7 @@
         <id>ChainPay</id>
 
         <!-- The package version number that is used when resolving dependencies -->
-        <version>1.0.2</version>
+        <version>1.1.0</version>
 
         <!-- Authors contain text that appears directly on the gallery -->
         <authors>Saifuddin Migraso</authors>
@@ -34,8 +34,8 @@
 
         <!-- Any details about this particular release -->
         <releaseNotes>
-		[ IOST-1.0.0 ]
-		Create/Read Signature Request 
+		[ IOST-1.1.0 ]
+		Use Protobuf instead of json
 		</releaseNotes>
 		
 		<summary>A Signature Request implementation for blockchain</summary>
