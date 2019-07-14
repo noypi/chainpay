@@ -34,7 +34,7 @@
 
         <!-- Any details about this particular release -->
         <releaseNotes>
-		[ IOST-1.1.0 ]
+		[ ChainPay-1.1.0 ]
 		Use Protobuf instead of json
 		</releaseNotes>
 		
