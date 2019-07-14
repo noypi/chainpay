@@ -1,3 +1,4 @@
+using ChainPay.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ChainPay.Net45.Test
@@ -8,36 +9,21 @@ namespace ChainPay.Net45.Test
         [TestMethod]
         public void TestSignatureRequest()
         {
-            var expectedDetails = new TransferDetailsDummy()
-            {
-                ChainId = 1234,
-                GasLimit = 100000
-            };
-            var expectedModel = new Models.SignatureRequest<TransferDetailsDummy>()
+            var expectedModel = new SignatureRequest()
             {
                 BlockchainCode = "IOST",
                 BlockchainName = "Internet Of Services",
                 HashAlgo = "SHA3-256",
-                MessageHash = "some hash",
-                TransferDetails = expectedDetails
+                MessageHash = "some hash"
             };
 
-            expectedDetails.Actions.Add("transfer");
-            expectedDetails.Actions.Add("createaccount");
-
-            string sr = ChainPay.CreateSignatureRequest<TransferDetailsDummy>(expectedModel);
-            var resultModel = ChainPay.ReadSignatureRequest<TransferDetailsDummy>(sr);
+            string sr = ChainPay.CreateSignatureRequest(expectedModel);
+            var resultModel = ChainPay.ReadSignatureRequest(sr);
 
             Assert.AreEqual(expectedModel.BlockchainName, resultModel.BlockchainName);
             Assert.AreEqual(expectedModel.BlockchainCode, resultModel.BlockchainCode);
             Assert.AreEqual(expectedModel.HashAlgo, resultModel.HashAlgo);
             Assert.AreEqual(expectedModel.MessageHash, resultModel.MessageHash);
-
-            var expected = expectedModel.TransferDetails;
-            var result = resultModel.TransferDetails;
-            Assert.AreEqual(expected.ChainId, result.ChainId);
-            Assert.AreEqual(expected.GasLimit, result.GasLimit);
-            CollectionAssert.AreEqual(expected.Actions, result.Actions);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace ChainPay
 {
+    using global::ChainPay.Models;
     using System.IO;
     using System.Text;
 
@@ -13,7 +14,7 @@
         /// <returns></returns>
         public static string CreateSignatureResponse(Models.SignatureResponse res)
         {
-            return Common.CreateSignature<Models.SignatureResponse>(res, "Response");
+            return Common.CreateSignature(res, "Response");
         }
 
         /// <summary>
@@ -39,7 +40,7 @@
         /// <returns></returns>
         public static Models.SignatureResponse ReadSignatureResponse(StreamReader reader)
         {
-            return Common.ReadSignature<Models.SignatureResponse>(reader);
+            return Common.ReadSignature(SignatureResponse.Parser, reader) as SignatureResponse;
         }
     }
 }

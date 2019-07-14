@@ -1,22 +1,23 @@
 namespace ChainPay
 {
+    using global::ChainPay.Models;
+    using Google.Protobuf;
     using System;
     using System.IO;
     using System.IO.Compression;
     using System.Text;
-    using Newtonsoft.Json;
 
     public class Common
     {
-        public static readonly string IGNORELINES_PREFIX = "----";
+        public static readonly string IGNORELINES_PREFIX = "#-- ";
 
-        public static string CreateSignature<M>(M res, string contentType)
+        public static string CreateSignature(IMessage res, string contentType)
         {
-            string base64 = Convert.ToBase64String(Common.SerializeToJsonGz<M>(res));
+            string base64 = Convert.ToBase64String(Common.SerializeToGz(res));
             var strbuf = new StringBuilder();
 
-            var beginstr = $"--------------- BEGIN ChainPay {contentType} ---------------";
-            var endstr = $"--------------- END   ChainPay {contentType} ---------------";
+            var beginstr = $"#-- BEGIN ChainPay {contentType}";
+            var endstr = $"#-- END   ChainPay {contentType}";
             strbuf.Append(beginstr);
             strbuf.AppendLine();
 
@@ -36,7 +37,7 @@ namespace ChainPay
             return strbuf.ToString();
         }
 
-        internal static M ReadSignature<M>(StreamReader reader)
+        internal static IMessage ReadSignature(MessageParser parser, StreamReader reader)
         {
             var strbuf = new StringBuilder();
 
@@ -54,37 +55,39 @@ namespace ChainPay
                 strbuf.Append(line.Trim());
             }
 
-            byte[] jsongz = Convert.FromBase64String(strbuf.ToString());
-            return DeserializeToJsonGz<M>(jsongz);
+            byte[] gz = Convert.FromBase64String(strbuf.ToString());
+            return DeserializeGz(parser, gz);
         }
 
-        internal static byte[] SerializeToJsonGz<M>(M req)
+        internal static byte[] SerializeToGz(IMessage req)
         {
             byte[] gzbytes = null;
-
+            
             using (var mem = new MemoryStream())
             {
+                var data = req.ToByteArray();
                 using (var gzwriter = new GZipStream(mem, CompressionLevel.Fastest))
-                using (var writer = new StreamWriter(gzwriter, UnicodeEncoding.UTF8))
+                using (var writer = new BinaryWriter(gzwriter))
                 {
-                    var json = JsonConvert.SerializeObject(req);
-                    writer.Write(json);
+                    writer.Write(data);
                     writer.Flush();
                 }
+
                 gzbytes = mem.ToArray();
             }
 
             return gzbytes;
         }
 
-        internal static M DeserializeToJsonGz<M>(byte[] jsongz)
+        internal static IMessage DeserializeGz(MessageParser parser, byte[] jsongz)
         {
             using (var mem = new MemoryStream(jsongz))
             using (var gzreader = new GZipStream(mem, CompressionMode.Decompress))
-            using (var reader = new StreamReader(gzreader, UnicodeEncoding.UTF8))
+            using (var outmem = new MemoryStream())
             {
-                var json = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<M>(json);
+                gzreader.CopyTo(outmem);
+                var data = outmem.ToArray();
+                return parser.ParseFrom(data);
             }
         }
     }

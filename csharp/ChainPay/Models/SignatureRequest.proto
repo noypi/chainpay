@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package ChainPay.Models;
+
+message SignatureRequest {
+
+    string BlockchainName = 1;
+
+    string BlockchainCode = 2;
+
+    string ExpiryUTCMillis = 3;
+
+    string Tag = 4;
+
+    string TransferMethod = 5;
+
+    string MessageHash = 6;
+
+    string HashAlgo = 7;
+
+    bytes TransferDetails = 8;
+}

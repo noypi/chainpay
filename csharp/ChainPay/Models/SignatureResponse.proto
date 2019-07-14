@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ChainPay.Models;
+
+message SignatureResponse {
+
+    string BlockchainName = 1;
+
+    string BlockchainCode = 2;
+
+    string Tag = 3;
+
+    string Signature = 4;
+
+    string Result = 5;
+
+    string TransactionHash = 6;
+}
