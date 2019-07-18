@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.9.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.8.0" />
     <PackageReference Include="Grpc.Tools" Version="1.22.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Models/SignatureRequest.proto"/>
-    <Protobuf Include="Models/SignatureResponse.proto"/>
+    <Protobuf Include="Models/SignatureRequest.proto" />
+    <Protobuf Include="Models/SignatureResponse.proto" />
   </ItemGroup>
   
 </Project>
