@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
-		<title>ChainPay</title>
-		<description>Blockchain Signature Request</description>
+        <title>ChainPay</title>
+        <description>Blockchain Signature Request</description>
         <id>ChainPay</id>
 
         <!-- The package version number that is used when resolving dependencies -->
@@ -34,11 +34,11 @@
 
         <!-- Any details about this particular release -->
         <releaseNotes>
-		[ ChainPay-1.1.0 ]
-		Use Protobuf instead of json
-		</releaseNotes>
-		
-		<summary>A Signature Request implementation for blockchain</summary>
+        [ ChainPay-1.1.1 ]
+        Rollback to Protobuf 3.8.0
+        </releaseNotes>
+        
+        <summary>A Signature Request implementation for blockchain</summary>
 
         <!-- Copyright information -->
         <copyright>Copyright ©2019 noypi</copyright>
@@ -50,10 +50,12 @@
         <dependencies>            
             <group targetFramework="net45">
                 <dependency id="Newtonsoft.Json" version="12.0.1"/>
+                <dependency id="Google.Protobuf" version="3.8.0" />
             </group>
             
             <group targetFramework="netstandard2.0">
                 <dependency id="Newtonsoft.Json" version="12.0.1"/>
+                <dependency id="Google.Protobuf" version="3.8.0" />
             </group>
         </dependencies>
     </metadata>
